@@ -17,7 +17,7 @@ export default defineConfig({
     ['list'],
   ['html', { outputFolder: 'playwright-report' }],
   ...(process.env.JIRA_ENABLED === 'true'
-    ? [['./setup/global-teardown.ts'] as const]
+    ? [['./tests/utils/JiraReporter.ts'] as const]
     : []),   // ✅ your custom Jira reporter
   ],
 use: {
