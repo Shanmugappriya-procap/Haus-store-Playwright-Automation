@@ -13,16 +13,22 @@ class JiraIntegrationReporter implements Reporter {
     errorMessage:      string;
     stackTrace:        string;
     suiteName:         string;
-    screenshotPath?:   string;   // ✅
-    tracePath?:        string;   // ✅
-    testLogs?:         string[]; // ✅
-    errorContextPath?: string;   // ✅ error-context.md
-    failedLine?:       string;   // ✅ exact failing line
-    filePath?:         string;   // ✅ test file + line number
+    screenshotPath?:   string;
+    tracePath?:        string;
+    testLogs?:         string[];
+    errorContextPath?: string;
+    failedLine?:       string;
+    filePath?:         string;
   }[] = [];
 
   onTestEnd(test: TestCase, result: TestResult): void {
     if (result.status === "failed" || result.status === "timedOut") {
+
+      // ✅ KEY FIX: Only collect the FINAL retry, skip intermediate retries
+      // e.g. retries=2: retry=0 → skip, retry=1 → skip, retry=2 → collect
+      const isLastRetry = result.retry === test.retries;
+      if (!isLastRetry) return;
+
       const errorMessage = result.errors?.[0]?.message || "Unknown error";
       const stackTrace   = result.errors?.[0]?.stack   || "";
       const suiteName    = test.parent?.title           || "";
@@ -62,10 +68,10 @@ class JiraIntegrationReporter implements Reporter {
         suiteName,
         screenshotPath:   screenshotAttachment?.path,
         tracePath:        traceAttachment?.path,
-        errorContextPath: errorContextAttachment?.path,  // ✅
+        errorContextPath: errorContextAttachment?.path,
         testLogs,
-        failedLine,                                       // ✅
-        filePath,                                         // ✅
+        failedLine,
+        filePath,
       });
     }
   }
