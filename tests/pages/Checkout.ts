@@ -1,4 +1,4 @@
-import { Page, Locator, expect } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import CheckOutDetails from '../Data/CheckoutDetails.json';
 
 export class CheckOut {
@@ -19,6 +19,10 @@ export class CheckOut {
     readonly orderConfirmation;
     readonly shippingType;
     readonly successfulOrderMessage;
+    readonly orderNumber;
+    readonly guestCheckoutBtn;
+    readonly orderHistoryHeading;
+    readonly orderHistoryList;
 
     constructor(page: Page) {
         this.page = page;
@@ -38,7 +42,10 @@ export class CheckOut {
         this.orderConfirmation = page.locator('#order-confirmation').first();
         this.shippingType = page.locator('//label[@class="radio-item selected"]').first();
         this.successfulOrderMessage = page.getByText("Placed Order!").first();
-
+        this.orderNumber = page.locator('#order-confirmation [data-testid="order-number"]').first();
+        this.guestCheckoutBtn = page.getByTestId('guest-checkout').first();
+        this.orderHistoryHeading = page.getByRole('heading', { name: /orders/i }).first();
+        this.orderHistoryList = page.locator('[data-testid="order-history-item"]');
     }
 
     async fillContactInformation() {
@@ -52,10 +59,12 @@ export class CheckOut {
         await this.postalCodeInput.fill(c.zip);
         await this.countryInput.selectOption(c.country);
     }
+
     async chooseShippingMethod() {
         await this.shippingType.click();
         await expect(this.shippingType).toBeChecked();
     }
+
     async fillPaymentDetails() {
         const p = CheckOutDetails.CheckoutDetails.PaymentInfo;
         await this.cardnumberInput.fill(p.cardNumber);
@@ -63,8 +72,31 @@ export class CheckOut {
         await this.cvvInput.fill(p.cvv);
         await this.nameOnCardInput.fill(p.nameOnCard);
     }
+
     async placeOrder() {
         await this.placeOrderBtn.click();
         await expect(this.successfulOrderMessage).toBeVisible();
-    }   
+    }
+
+    async verifyOrderConfirmation() {
+        await expect(this.orderConfirmation).toBeVisible();
+        await expect(this.successfulOrderMessage).toBeVisible();
+        await expect(this.orderNumber).toBeVisible();
+        const orderNum = await this.orderNumber.textContent();
+        expect(orderNum?.trim().length).toBeGreaterThan(0);
+    }
+
+    async proceedAsGuest() {
+        await this.guestCheckoutBtn.click();
+    }
+
+    async gotoOrderHistory() {
+        await this.page.locator('#profile-email').first().click();
+        await this.page.getByRole('link', { name: /orders/i }).first().click();
+        await expect(this.orderHistoryHeading).toBeVisible();
+    }
+
+    async verifyRecentOrderVisible() {
+        await expect(this.orderHistoryList.first()).toBeVisible();
+    }
 }
