@@ -1,0 +1,21 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint", "playwright"],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:playwright/recommended"
+  ],
+  "rules": {
+    "playwright/no-wait-for-timeout": "error",
+    "playwright/no-force-option": "error",
+    "playwright/require-top-level-describe": "error",
+    "@typescript-eslint/no-explicit-any": "error"
+  },
+  "ignorePatterns": ["node_modules/", "dist/", "playwright-report/", "test-results/"]
+}

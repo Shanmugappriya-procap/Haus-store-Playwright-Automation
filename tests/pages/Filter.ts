@@ -1,4 +1,4 @@
-import { Page, Locator, expect } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import testData from '../Data/TestData.json';
 
 export class Filter {
@@ -27,7 +27,6 @@ export class Filter {
     // ✅ All filter button is active
     await expect(this.page.getByTestId(f.testId).nth(0))
       .toHaveClass(/active/);
-      await this.page.waitForTimeout(5000);
 
     }
 

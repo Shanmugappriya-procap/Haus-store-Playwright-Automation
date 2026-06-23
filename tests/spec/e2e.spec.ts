@@ -1,71 +1,70 @@
-import { test, expect } from "@playwright/test";
+import { test } from "@playwright/test";
 import { Login } from "../pages/Login";
 import { Logout } from "../pages/Logout";
 import { Products } from "../pages/Products";
 import { Filter } from "../pages/Filter";
 import { Cart } from "../pages/AddProducts";
 import { CheckOut } from "../pages/Checkout";
-import {JiraReporter} from "../utils/JiraReporter"
 import { JiraClient } from "../../jira/JiraClient";
 
-test("End to End Test for E-commerce applications", async ({ page }) => {
+test.describe("E2E: Full Purchase Flow", () => {
+  test("completes login, browse, add-to-cart, checkout and order confirmation", async ({ page }) => {
+    const login = new Login(page);
+    const logout = new Logout(page);
+    const checkout = new CheckOut(page);
+    const products = new Products(page);
+    const filter = new Filter(page);
+    const cart = new Cart(page);
+    const jira = new JiraClient();
 
-  const login = new Login(page);
-  const logout = new Logout(page);
-  const checkout = new CheckOut(page);
-  const products = new Products(page);
-  const filter = new Filter(page);
-  const cart = new Cart(page);
-  const jira     = new JiraClient();
+    try {
+      await login.gotoUrl();
+      await login.gotoLogin();
+      await login.performInvalidLogin();
+      await login.performLogin();
 
-  try {
-  await login.gotoUrl(); //Goto application URL
-  await login.gotoLogin(); //Goto login page
-  await login.performInvalidLogin(); //Perform login with invalid credentials
-  await login.performLogin(); //Perform valid login
-  await products.gotoShopNow(); // Click on Shop Now button and verify navigation 
-  await filter.applyAllFilter(); // Apply all filter
-  await cart.addProductsDynamically(); // To be implemented - Add products to cart based on JSON data and verify cart count
-  await cart.gotoCart(); // Navigate to cart page
-  await cart.verifyCartPricing(); //Verify cart pricing by calculating expected total based on product prices, quantities, applied discounts and shipping costs and comparing with displayed total
+      await products.gotoShopNow();
 
-  // Apply HAUS20 promo code and verify discount
-  await cart.applyPromoCode('HAUS20');
-  await cart.verifyHaus20Discount();
+      // Navigate to PDP and verify heading + image are visible
+      await products.gotoProductDetail();
 
-  // Apply FREESHIP promo code and verify free shipping
-  await cart.applyPromoCode('FREESHIP');
-  await cart.verifyFreeShipping();
+      // Add to cart from PDP and verify cart count increments
+      await cart.addToCartFromPDP();
+      await products.returnToShop();
 
-  // Apply invalid promo code and verify error message
-  await cart.applyPromoCode('INVALID');
+      await filter.applyAllFilter();
+      await cart.addProductsDynamically();
+      await cart.gotoCart();
+      await cart.verifyCartPricing();
 
-  //Proceed Checkout
-  await cart.proceedToCheckout(); 
-  await checkout.fillContactInformation(); // Fill mandatory details to place order
-  await checkout.chooseShippingMethod();
-  await checkout.fillPaymentDetails();
-  await checkout.placeOrder();
+      await cart.applyPromoCode('HAUS20');
+      await cart.verifyHaus20Discount();
 
-  // Perform logout 
-  await logout.performLogout();
-} catch (error: any) {
+      await cart.applyPromoCode('FREESHIP');
+      await cart.verifyFreeShipping();
 
-        // ❌ Take screenshot on failure
-        const screenshotPath = `test-results/failure-${Date.now()}.png`;
-        await page.screenshot({ path: screenshotPath, fullPage: true });
+      await cart.applyPromoCode('INVALID');
 
-        // ❌ Create Jira bug automatically
-        await jira.reportFailure(
-            "End to End Test for E-commerce applications",
-            error.message,
-            screenshotPath
-        );
+      await cart.proceedToCheckout();
+      await checkout.fillContactInformation();
+      await checkout.chooseShippingMethod();
+      await checkout.fillPaymentDetails();
+      await checkout.placeOrder();
 
-        // Re-throw so Playwright still marks the test as failed
-        throw error;
+      // Assert confirmation page shows order number and summary
+      await checkout.verifyOrderConfirmation();
+
+      // Navigate to order history and verify recent order is listed
+      await checkout.gotoOrderHistory();
+      await checkout.verifyRecentOrderVisible();
+
+      await logout.performLogout();
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : String(error);
+      const screenshotPath = `test-results/failure-${Date.now()}.png`;
+      await page.screenshot({ path: screenshotPath, fullPage: true });
+      await jira.reportFailure("E2E: Full Purchase Flow", message, screenshotPath);
+      throw error;
     }
-
+  });
 });
-
-

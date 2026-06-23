@@ -83,6 +83,7 @@ export class JiraReporter {
     const failedLine   = rawLine  ? stripAnsi(rawLine)   : undefined;
     const cleanLogs    = testLogs?.map(stripAnsi).filter(Boolean);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const content: any[] = [
       // ── ✅ Custom assertion message (highlighted at the top) ───────────────
       ...(customMessage ? [
@@ -195,6 +196,7 @@ export class JiraReporter {
     }
 
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const fields: any = {
         project:     { key: this.projectKey },
         summary:     this.buildSummary(payload),           // ✅ uses custom message
@@ -228,14 +230,16 @@ export class JiraReporter {
 
       return issueKey;
 
-    } catch (error: any) {
-      console.error("❌ Failed to create Jira bug:", error.response?.data || error.message);
+    } catch (error: unknown) {
+      const e = error as { response?: { data: unknown }; message?: string };
+      console.error("❌ Failed to create Jira bug:", e.response?.data || e.message);
       return null;
     }
   }
 
   // ── Attach any file ───────────────────────────────────────────────────────
   private async attachFile(issueKey: string, filePath: string): Promise<void> {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const FormData = require("form-data");
     const form = new FormData();
     form.append("file", fs.createReadStream(filePath), path.basename(filePath));
@@ -253,8 +257,9 @@ export class JiraReporter {
         }
       );
       console.log(`✅ Attached: ${path.basename(filePath)} → ${issueKey}`);
-    } catch (error: any) {
-      console.error(`❌ Failed to attach ${path.basename(filePath)}:`, error.response?.data || error.message);
+    } catch (error: unknown) {
+      const e = error as { response?: { data: unknown }; message?: string };
+      console.error(`❌ Failed to attach ${path.basename(filePath)}:`, e.response?.data || e.message);
     }
   }
 

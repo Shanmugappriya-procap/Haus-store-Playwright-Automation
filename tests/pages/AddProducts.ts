@@ -25,6 +25,14 @@ export class Cart {
         return this.page.locator("//span[@id='cart-count']").first();
     }
 
+    get pdpSizeButtons() {
+        return this.page.locator('#page-product [data-testid^="size-btn"]');
+    }
+
+    get pdpAddToCartBtn() {
+        return this.page.getByTestId('pdp-add-to-cart').first();
+    }
+
     constructor(page: Page) {
         this.page = page;
         this.cartPageLanding = page.getByText("Your Cart").first();
@@ -123,6 +131,19 @@ export class Cart {
 
         await expect(this.summaryShipping).toContainText(p.formattedShipping);
         await expect(this.summaryTotal).toContainText(p.formattedTotal);
+    }
+
+    async addToCartFromPDP() {
+        const sizeBtn = this.pdpSizeButtons.first();
+        const hasSizes = await sizeBtn.count() > 0;
+        if (hasSizes) {
+            await sizeBtn.click();
+        }
+        const before = parseInt((await this.cartCount.textContent()) ?? '0', 10);
+        await this.pdpAddToCartBtn.click();
+        await expect(this.toast).toContainText('added to cart', { timeout: 6000 });
+        const after = parseInt((await this.cartCount.textContent()) ?? '0', 10);
+        expect(after).toBeGreaterThan(before);
     }
 
     async proceedToCheckout() {
