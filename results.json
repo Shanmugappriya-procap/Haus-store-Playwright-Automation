@@ -1,0 +1,634 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/node_modules/.bin/playwright",
+      "test",
+      "--reporter=json,line",
+      "--trace",
+      "off"
+    ],
+    "configFile": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/playwright.config.ts",
+    "rootDir": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ],
+      [
+        "line"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "e2e.spec.ts",
+      "file": "e2e.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "E2E: Full Purchase Flow",
+          "file": "e2e.spec.ts",
+          "line": 9,
+          "column": 6,
+          "specs": [
+            {
+              "title": "completes login, browse, add-to-cart, checkout and order confirmation",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 11535,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('//span[@id=\\'cart-count\\']').first()\nExpected: \u001b[32m\"3\"\u001b[39m\nReceived: \u001b[31m\"4\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('//span[@id=\\'cart-count\\']').first()\u001b[22m\n\u001b[2m    14 × locator resolved to <span id=\"cart-count\" class=\"cart-count\" data-testid=\"cart-count\">4</span>\u001b[22m\n\u001b[2m       - unexpected value \"4\"\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('//span[@id=\\'cart-count\\']').first()\nExpected: \u001b[32m\"3\"\u001b[39m\nReceived: \u001b[31m\"4\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('//span[@id=\\'cart-count\\']').first()\u001b[22m\n\u001b[2m    14 × locator resolved to <span id=\"cart-count\" class=\"cart-count\" data-testid=\"cart-count\">4</span>\u001b[22m\n\u001b[2m       - unexpected value \"4\"\u001b[22m\n\n    at Cart.addProductsDynamically (/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/tests/pages/AddProducts.ts:69:14)\n    at /tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/tests/e2e.spec.ts:33:5",
+                        "location": {
+                          "file": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/tests/pages/AddProducts.ts",
+                          "column": 14,
+                          "line": 69
+                        },
+                        "snippet": "   at pages/AddProducts.ts:69\n\n  67 |         // Final cart count assertion\n  68 |         await expect(this.cartCount)\n> 69 |             .toHaveText(cartData.cartProducts.multipleAdd.expectedCartCount);\n     |              ^\n  70 |     }\n  71 |\n  72 |     async gotoCart() {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/tests/pages/AddProducts.ts",
+                            "column": 14,
+                            "line": 69
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('//span[@id=\\'cart-count\\']').first()\nExpected: \u001b[32m\"3\"\u001b[39m\nReceived: \u001b[31m\"4\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('//span[@id=\\'cart-count\\']').first()\u001b[22m\n\u001b[2m    14 × locator resolved to <span id=\"cart-count\" class=\"cart-count\" data-testid=\"cart-count\">4</span>\u001b[22m\n\u001b[2m       - unexpected value \"4\"\u001b[22m\n\n\n   at pages/AddProducts.ts:69\n\n  67 |         // Final cart count assertion\n  68 |         await expect(this.cartCount)\n> 69 |             .toHaveText(cartData.cartProducts.multipleAdd.expectedCartCount);\n     |              ^\n  70 |     }\n  71 |\n  72 |     async gotoCart() {\n    at Cart.addProductsDynamically (/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/tests/pages/AddProducts.ts:69:14)\n    at /tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/tests/e2e.spec.ts:33:5"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-05T10:35:36.883Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results/e2e-E2E-Full-Purchase-Flow-b60e5-kout-and-order-confirmation/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results/e2e-E2E-Full-Purchase-Flow-b60e5-kout-and-order-confirmation/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results/e2e-E2E-Full-Purchase-Flow-b60e5-kout-and-order-confirmation/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/tests/pages/AddProducts.ts",
+                        "column": 14,
+                        "line": 69
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "b1c7859d981cc20c96be-0d60eb1c5da4242260a4",
+              "file": "e2e.spec.ts",
+              "line": 10,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "filter.spec.ts",
+      "file": "filter.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "E2E: Product Filter",
+          "file": "filter.spec.ts",
+          "line": 7,
+          "column": 6,
+          "specs": [
+            {
+              "title": "applies all category filters and verifies product counts",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3755,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-05T10:35:49.011Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results/filter-E2E-Product-Filter--b2306-and-verifies-product-counts/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results/filter-E2E-Product-Filter--b2306-and-verifies-product-counts/video.webm"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ed23e33daf90fda383e3-e0a779b2b41263bae5d4",
+              "file": "filter.spec.ts",
+              "line": 8,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "guest-checkout.spec.ts",
+      "file": "guest-checkout.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Guest Checkout",
+          "file": "guest-checkout.spec.ts",
+          "line": 7,
+          "column": 6,
+          "specs": [
+            {
+              "title": "completes purchase without an account",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 31126,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/tests/pages/Checkout.ts",
+                            "column": 37,
+                            "line": 90
+                          },
+                          "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByTestId('guest-checkout').first()\u001b[22m\n\n\n   at pages/Checkout.ts:90\n\n  88 |\n  89 |     async proceedAsGuest() {\n> 90 |         await this.guestCheckoutBtn.click();\n     |                                     ^\n  91 |     }\n  92 |\n  93 |     async gotoOrderHistory() {\n    at CheckOut.proceedAsGuest (/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/tests/pages/Checkout.ts:90:37)\n    at /tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/tests/guest-checkout.spec.ts:23:20"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-05T10:35:52.879Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results/guest-checkout-Guest-Check-d6e85-purchase-without-an-account/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results/guest-checkout-Guest-Check-d6e85-purchase-without-an-account/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results/guest-checkout-Guest-Check-d6e85-purchase-without-an-account/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "ee0179bae1b1dc35fd9c-fcaec7932eb74e607e74",
+              "file": "guest-checkout.spec.ts",
+              "line": 8,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "registration.spec.ts",
+      "file": "registration.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Registration",
+          "file": "registration.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "happy path: new account creation redirects and shows confirmation",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 30193,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/tests/pages/Login.ts",
+                            "column": 42,
+                            "line": 79
+                          },
+                          "message": "Error: locator.fill: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#register-password').first()\u001b[22m\n\n\n   at pages/Login.ts:79\n\n  77 |     async performRegistration(email: string, password: string, firstName: string, lastName: string) {\n  78 |         await this.registerEmailInput.fill(email);\n> 79 |         await this.registerPasswordInput.fill(password);\n     |                                          ^\n  80 |         await this.registerConfirmPasswordInput.fill(password);\n  81 |         await this.registerFirstNameInput.fill(firstName);\n  82 |         await this.registerLastNameInput.fill(lastName);\n    at Login.performRegistration (/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/tests/pages/Login.ts:79:42)\n    at /tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/tests/registration.spec.ts:10:5"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-05T10:36:24.488Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results/registration-Registration--df31b-ects-and-shows-confirmation/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results/registration-Registration--df31b-ects-and-shows-confirmation/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results/registration-Registration--df31b-ects-and-shows-confirmation/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "1e5aa7b6f95ae669165d-c1cdbb56eed51986f1ba",
+              "file": "registration.spec.ts",
+              "line": 5,
+              "column": 7
+            },
+            {
+              "title": "validation: duplicate email surfaces an error",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 30198,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/tests/pages/Login.ts",
+                            "column": 42,
+                            "line": 89
+                          },
+                          "message": "Error: locator.fill: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#register-password').first()\u001b[22m\n\n\n   at pages/Login.ts:89\n\n  87 |     async verifyDuplicateEmailError() {\n  88 |         await this.registerEmailInput.fill(testData.users.validUser.email);\n> 89 |         await this.registerPasswordInput.fill('SecurePass123!');\n     |                                          ^\n  90 |         await this.registerConfirmPasswordInput.fill('SecurePass123!');\n  91 |         await this.registerBtn.click();\n  92 |         await expect(this.registerError).toBeVisible();\n    at Login.verifyDuplicateEmailError (/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/tests/pages/Login.ts:89:42)\n    at /tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/tests/registration.spec.ts:26:5"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-05T10:36:55.247Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results/registration-Registration--2d278-ate-email-surfaces-an-error/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results/registration-Registration--2d278-ate-email-surfaces-an-error/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results/registration-Registration--2d278-ate-email-surfaces-an-error/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "1e5aa7b6f95ae669165d-b921e1faa88cf41a9baa",
+              "file": "registration.spec.ts",
+              "line": 21,
+              "column": 7
+            },
+            {
+              "title": "validation: empty required fields surface an error",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1291,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-05T10:37:26.039Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results/registration-Registration--8584c-red-fields-surface-an-error/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results/registration-Registration--8584c-red-fields-surface-an-error/video.webm"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1e5aa7b6f95ae669165d-3a974aa998602c24b72c",
+              "file": "registration.spec.ts",
+              "line": 29,
+              "column": 7
+            },
+            {
+              "title": "validation: weak password surfaces an error",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 30162,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/tests/pages/Login.ts",
+                            "column": 42,
+                            "line": 102
+                          },
+                          "message": "Error: locator.fill: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#register-password').first()\u001b[22m\n\n\n   at pages/Login.ts:102\n\n  100 |     async verifyWeakPasswordError() {\n  101 |         await this.registerEmailInput.fill('weaktest@haus.com');\n> 102 |         await this.registerPasswordInput.fill('123');\n      |                                          ^\n  103 |         await this.registerConfirmPasswordInput.fill('123');\n  104 |         await this.registerBtn.click();\n  105 |         await expect(this.registerError).toBeVisible();\n    at Login.verifyWeakPasswordError (/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/tests/pages/Login.ts:102:42)\n    at /tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/tests/registration.spec.ts:42:5"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-05T10:37:27.430Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results/registration-Registration--3c88a--password-surfaces-an-error/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results/registration-Registration--3c88a--password-surfaces-an-error/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results/registration-Registration--3c88a--password-surfaces-an-error/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "1e5aa7b6f95ae669165d-6bd17c37978924f51c62",
+              "file": "registration.spec.ts",
+              "line": 37,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "search.spec.ts",
+      "file": "search.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "E2E: Product Search",
+          "file": "search.spec.ts",
+          "line": 6,
+          "column": 6,
+          "specs": [
+            {
+              "title": "performs search and verifies results",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1520,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-05T10:37:58.076Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results/search-E2E-Product-Search--75b08-search-and-verifies-results/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/maestro/588c128c-dc92-470a-b107-6156d6e1dd31/app/test-results/search-E2E-Product-Search--75b08-search-and-verifies-results/video.webm"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a088064de9fe351eef5f-23c5bcde7750a67fe2bf",
+              "file": "search.spec.ts",
+              "line": 7,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-08-05T10:35:36.179Z",
+    "duration": 143569.36800000002,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 5,
+    "flaky": 0
+  }
+}
