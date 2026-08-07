@@ -36,10 +36,10 @@ export class Login {
 
         this.registerTab = page.getByTestId('tab-register').first();
         this.registerEmailInput = page.getByTestId('form-register').getByPlaceholder('you@example.com').first();
-        this.registerPasswordInput = page.locator('#register-password').first();
-        this.registerConfirmPasswordInput = page.locator('#register-confirm-password').first();
-        this.registerFirstNameInput = page.getByTestId('form-register').getByPlaceholder('Jane').first();
-        this.registerLastNameInput = page.getByTestId('form-register').getByPlaceholder('Smith').first();
+        this.registerPasswordInput = page.getByTestId('reg-password').first();
+        this.registerConfirmPasswordInput = page.getByTestId('reg-confirm-password').first();
+        this.registerFirstNameInput = page.getByTestId('reg-firstname').first();
+        this.registerLastNameInput = page.getByTestId('reg-lastname').first();
         this.registerBtn = page.getByTestId('register-btn').first();
         this.registerError = page.locator('#register-error').first();
         this.registerSuccessToast = page.locator('#toast').first();

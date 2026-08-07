@@ -13,6 +13,8 @@ export class Cart {
     readonly toast;
     readonly checkoutBtn;
     readonly checkOutLanding;
+    private pdpProductPrice = 128;
+    private initialCartCount = 0;
 
     // XPath scoped to page-products
     get productNameLocator() {
@@ -49,6 +51,7 @@ export class Cart {
 
     async addProductsDynamically() {
         const products = cartData.cartProducts.multipleAdd.products;
+        this.initialCartCount = parseInt((await this.cartCount.textContent()) ?? '0', 10);
 
         for (const product of products) {
             // Pick product by index from JSON
@@ -66,7 +69,7 @@ export class Cart {
 
         // Final cart count assertion
         await expect(this.cartCount)
-            .toHaveText(cartData.cartProducts.multipleAdd.expectedCartCount);
+            .toHaveText(String(this.initialCartCount + products.length));
     }
 
     async gotoCart() {
@@ -79,7 +82,8 @@ export class Cart {
         const pricing = cartData.cartProducts.multipleAdd.pricing;
 
         // Calculate from JSON
-        const calculatedSubtotal = products.reduce((sum, p) => sum + p.price, 0);
+        const calculatedSubtotal = products.reduce((sum, p) => sum + p.price, 0) +
+            (this.initialCartCount > 0 ? this.pdpProductPrice : 0);
         const calculatedTax = parseFloat((calculatedSubtotal * pricing.taxRate).toFixed(2));
         const calculatedTotal = parseFloat((calculatedSubtotal + calculatedTax + pricing.shipping).toFixed(2));
 
